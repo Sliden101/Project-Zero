@@ -48,28 +48,57 @@ void initGame(Tigr* screen, GameState* game){
     game->player.focusMode = 0;
     game->player.color = tigrRGB(0,255,255);
 
-
-
 }
 
 void cleanUpGame(GameState* game){
     shutdown_audio(&game->audio);
 }
 
+void menu(Tigr* screen, GameState* game){
+
+}
+
+void playing(Tigr* screen, GameState* game){
+    tigrClear(screen, tigrRGB(255, 0, 0));
+    
+    drawPlayer(screen,&game->player);
+    movePlayer(screen, &game->player);
+    tigrRect(screen, 0, 0, 300, 480, tigrRGB(0,255,255));
+
+}
+
+void paused(Tigr* screen, GameState* game){
+
+}
+
+void gameOver(Tigr* screen, GameState* game){
+    Tigr* picture = tigrLoadImage("assets/gameover.png");
+
+    int x = (screen->w - picture->w) / 2;
+    int y = (screen->h - picture->h) / 2;
+
+    tigrBlit(screen, picture, x, y, 0, 0, picture->w, picture->h);
+    tigrFree(picture);
+}
 
 int main() {
     Tigr* screen = tigrWindow(500, 480, "Project Zero", 0);
-    GameState game = {0};  // Initialize all fields to zero
+    GameState game;
 
     initGame(screen, &game);
     
     while (!tigrClosed(screen)) {
-        tigrClear(screen, tigrRGB(255, 0, 0));
-        
-        drawPlayer(screen,&game.player);
-        movePlayer(screen, &game.player);
-        tigrRect(screen, 0, 0, 300, 480, tigrRGB(0,255,255));
-        // tigrRect(Tigr *bmp, int x, int y, int w, int h, TPixel color);
+
+        if(game.gameState==1){
+            playing(screen, &game);
+        } else if(game.gameState==2){
+            paused(screen, &game);
+        } else if(game.gameState==3){
+            gameOver(screen,&game);
+        } else{
+            playing(screen, &game);
+        }
+
         tigrUpdate(screen);
     }
     

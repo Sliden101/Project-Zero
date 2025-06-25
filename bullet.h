@@ -9,3 +9,4 @@ typedef struct {
     int active;          // 0 = Inactive, 1 = Active
     TPixel color;        
 } Bullet;
+
