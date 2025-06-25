@@ -1,10 +1,16 @@
 # Project Zero
 
 
+## Dependencies
+
+https://github.com/mackron/miniaudio
+https://github.com/erkkah/tigr
 
 ```sh
+#Windows tbd
+
 # Linux
-gcc main.c tigr.c player.c boss.c bullet.c -o ./dist/out -lGLU -lGL -lX11 && ./dist/out
+gcc main.c tigr.c player.c boss.c bullet.c audio.c -o ./dist/out -lGLU -lGL -lX11 -lm && ./dist/out
 
 ```
 

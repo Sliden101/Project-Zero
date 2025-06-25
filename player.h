@@ -12,4 +12,4 @@ typedef struct {
 
 void drawCircleFill(Tigr* screen, int cx, int cy, int r, TPixel color);
 void drawPlayer(Tigr* screen, Player* player); // initialize player
-void playerMovment(Tigr* screen,Player* player); // movement
+void movePlayer(Tigr* screen,Player* player); // movement

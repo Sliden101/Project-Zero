@@ -14,7 +14,7 @@ void drawPlayer(Tigr* screen, Player* player){
    drawCircleFill(screen,(int)player->x,(int)player->y,(int)player->hitboxRadius,player->color);
 }
 
-void playerMovment(Tigr* screen,Player* player){
+void movePlayer(Tigr* screen,Player* player){
   float speed=3.0f;
      if(tigrKeyHeld(screen,TK_RIGHT)){
         player->x+=speed;
@@ -22,8 +22,8 @@ void playerMovment(Tigr* screen,Player* player){
      if(tigrKeyHeld(screen,TK_LEFT)){
         player->x-=speed;
      }if(tigrKeyHeld(screen,TK_UP)){
-        player->y+=speed;
-     }if(tigrKeyHeld(screen,TK_DOWN)){
         player->y-=speed;
+     }if(tigrKeyHeld(screen,TK_DOWN)){
+        player->y+=speed;
      }
 }
