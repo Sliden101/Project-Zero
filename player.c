@@ -8,15 +8,25 @@ void drawPlayer(Tigr* screen, Player* player){
 }
 
 void movePlayer(Tigr* screen,Player* player){
-  float speed=3.0f;
-     if(tigrKeyHeld(screen,TK_RIGHT)){
-        player->x+=speed;
+  float speed=3.0f; float shift_speed=1.0f;
+  if(tigrKeyHeld(screen,TK_SHIFT)){
+     player->focusMode=1;
+  }
+  else {
+   player->focusMode=0;
+  }
+   float currentSpeed=(player->focusMode==1)? shift_speed:speed;
+     if(tigrKeyHeld(screen,TK_RIGHT)&&player->x+player->hitboxRadius<300){
+        player->x+=currentSpeed;
      }
      if(tigrKeyHeld(screen,TK_LEFT)&&player->x-player->hitboxRadius > 0){
-        player->x-=speed;
-     }if(tigrKeyHeld(screen,TK_UP)){
-        player->y-=speed;
-     }if(tigrKeyHeld(screen,TK_DOWN)){
-        player->y+=speed;
+        player->x-=currentSpeed;
+     }if(tigrKeyHeld(screen,TK_UP)&&player->y-player->hitboxRadius>0){
+        player->y-=currentSpeed;
+     }if(tigrKeyHeld(screen,TK_DOWN)&&player->y+player->hitboxRadius<480){
+        player->y+=currentSpeed;
      }
-}
+   }
+   
+    
+
