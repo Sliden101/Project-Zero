@@ -1,23 +1,17 @@
-// #include "tigr.h"
-
-// typedef struct {
-//     float x, y;          // Position
-//     float hitboxRadius;  // Collision size
-//     int lives;           
-//     int bombs;           // Bomb clear screen of bullets
-//     int invincibleFrames;// Frames after being hit
-//     int hitFlashFrames;  // Visual feedback when hit
-//     int focusMode;       // 0=normal, 1=focused (slow movement)
-//     TPixel color;        
-// } Player;
-
-// typedef struct {
-//     float x, y;
-//     float hitboxRadius;
-
-// } Boss;
+#include "tigr.h"
 #include "player.h"
-int main(){
-    player();
+#include "boss.h"
+#include "bullet.h"
+
+int main(int argc, char *argv[])
+{
+    Tigr *screen = tigrWindow(320, 240, "Hello", 0);
+    while (!tigrClosed(screen))
+    {
+        tigrClear(screen, tigrRGB(0x80, 0x90, 0xa0));
+        tigrPrint(screen, tfont, 120, 110, tigrRGB(0xff, 0xff, 0xff), "Hello, world.");
+        tigrUpdate(screen);
+    }
+    tigrFree(screen);
     return 0;
 }

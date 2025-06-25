@@ -3,7 +3,9 @@
 
 
 ```sh
-gcc main.c tigr.c -o ./dist/out -lGLU -lGL -lX11
+# Linux
+gcc main.c tigr.c player.c boss.c bullet.c -o ./dist/out -lGLU -lGL -lX11 && ./dist/out
+
 ```
 
 touhou style game
@@ -38,3 +40,5 @@ lasers + left right float?
 story:
 
 pheaktra (main character) writes spagetti code which mr ronan (boss) absolutely doesn't like
+
+story lines

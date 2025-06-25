@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.rmd": "markdown",
+        "bullet.h": "c",
+        "numbers": "c"
+    }
+}
