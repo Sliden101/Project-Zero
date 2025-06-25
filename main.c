@@ -36,6 +36,11 @@ void initGame(Tigr* screen, GameState* game){
     game->score = 0;
     game->gameState = 0;
 
+    game->phase = 1;
+    game->frameCount = 0;
+    game->gameTime = 0;
+    
+
     //Player Init
     game->player.x = 100;
     game->player.y = 100;
@@ -47,6 +52,7 @@ void initGame(Tigr* screen, GameState* game){
     game->player.invincibleFrames = 0;
     game->player.focusMode = 0;
     game->player.color = tigrRGB(0,255,255);
+    
 
 }
 
@@ -55,6 +61,13 @@ void cleanUpGame(GameState* game){
 }
 
 void menu(Tigr* screen, GameState* game){
+    Tigr* picture = tigrLoadImage("assets/menu.png");
+
+    int x = (screen->w - picture->w) / 2;
+    int y = (screen->h - picture->h) / 2;
+
+    tigrBlit(screen, picture, x, y, 0, 0, picture->w, picture->h);
+    tigrFree(picture);
 
 }
 
@@ -98,7 +111,6 @@ int main() {
         } else{
             playing(screen, &game);
         }
-
         tigrUpdate(screen);
     }
     
