@@ -11,7 +11,9 @@ void drawCircleFill(Tigr* screen, int cx, int cy, int r, TPixel color) {
     }
 }
 void drawPlayer(Tigr* screen, Player* player){
-   drawCircleFill(screen,(int)player->x,(int)player->y,(int)player->hitboxRadius,player->color);
+   tigrCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
+   tigrFillCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
+   // drawCircleFill(screen,(int)player->x,(int)player->y,(int)player->hitboxRadius,player->color);
 }
 
 void movePlayer(Tigr* screen,Player* player){
@@ -19,7 +21,7 @@ void movePlayer(Tigr* screen,Player* player){
      if(tigrKeyHeld(screen,TK_RIGHT)){
         player->x+=speed;
      }
-     if(tigrKeyHeld(screen,TK_LEFT)){
+     if(tigrKeyHeld(screen,TK_LEFT)&&player->x-player->hitboxRadius > 0){
         player->x-=speed;
      }if(tigrKeyHeld(screen,TK_UP)){
         player->y-=speed;

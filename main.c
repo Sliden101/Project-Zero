@@ -58,17 +58,18 @@ void cleanUpGame(GameState* game){
 
 
 int main() {
-    Tigr* screen = tigrWindow(640, 480, "Project Zero", 0);
+    Tigr* screen = tigrWindow(500, 480, "Project Zero", 0);
     GameState game = {0};  // Initialize all fields to zero
 
     initGame(screen, &game);
     
     while (!tigrClosed(screen)) {
-        tigrClear(screen, tigrRGB(0, 0, 0));
+        tigrClear(screen, tigrRGB(255, 0, 0));
         
         drawPlayer(screen,&game.player);
         movePlayer(screen, &game.player);
-        
+        tigrRect(screen, 0, 0, 300, 480, tigrRGB(0,255,255));
+        // tigrRect(Tigr *bmp, int x, int y, int w, int h, TPixel color);
         tigrUpdate(screen);
     }
     
