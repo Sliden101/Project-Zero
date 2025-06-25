@@ -10,6 +10,5 @@ typedef struct {
     TPixel color;        // Base color
 } Player;
 
-void drawCircleFill(Tigr* screen, int cx, int cy, int r, TPixel color);
 void drawPlayer(Tigr* screen, Player* player); // initialize player
 void movePlayer(Tigr* screen,Player* player); // movement
