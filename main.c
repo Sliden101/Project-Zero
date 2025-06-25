@@ -3,6 +3,10 @@
 #include "boss.h"
 #include "bullet.h"
 
+void initGame(Tigr screen, ){
+
+}
+
 int main(int argc, char *argv[])
 {
     Tigr *screen = tigrWindow(320, 240, "Hello", 0);
