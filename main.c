@@ -8,6 +8,12 @@
 
 #define MAX_BULLETS 2000
 
+#define SCREEN_WIDTH 500
+#define SCREEN_HEIGHT 480
+
+#define GAME_WIDTH 300
+
+
 typedef struct {
     Player player;
     Boss boss;
@@ -42,8 +48,8 @@ void initGame(Tigr* screen, GameState* game){
     
 
     //Player Init
-    game->player.x = 100;
-    game->player.y = 100;
+    game->player.x = GAME_WIDTH/2;
+    game->player.y = SCREEN_HEIGHT-50;
 
     game->player.hitboxRadius = 5;
     game->player.lives = 10;
@@ -62,21 +68,43 @@ void cleanUpGame(GameState* game){
 
 void menu(Tigr* screen, GameState* game){
     Tigr* picture = tigrLoadImage("assets/menu.png");
+    
 
     int x = (screen->w - picture->w) / 2;
     int y = (screen->h - picture->h) / 2;
 
     tigrBlit(screen, picture, x, y, 0, 0, picture->w, picture->h);
+
+    tigrRect(screen, SCREEN_WIDTH/2 - 200, SCREEN_HEIGHT/2, 100, 50, tigrRGB(0,255,255));
+    tigrRect(screen, SCREEN_WIDTH/2 + 100, SCREEN_HEIGHT/2, 100, 50, tigrRGB(255,0,255));
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2 - 165,SCREEN_HEIGHT/2+20, tigrRGB(0,255,255),"PLAY");
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2 + 135,SCREEN_HEIGHT/2+18, tigrRGB(0,255,255),"QUIT");
+
+    if(tigrKeyDown(screen, 'P')){
+        game->gameState=1;
+    }
+    if(tigrKeyDown(screen,'Q')){
+           cleanUpGame(game);
+           tigrFree(screen); 
+    }
+
+
     tigrFree(picture);
+
+    
 
 }
 
 void playing(Tigr* screen, GameState* game){
     tigrClear(screen, tigrRGB(255, 0, 0));
-    
+    if(tigrKeyDown(screen,'Q')){
+           cleanUpGame(game);
+           tigrFree(screen); 
+    }
+
     drawPlayer(screen,&game->player);
     movePlayer(screen, &game->player);
-    tigrRect(screen, 0, 0, 300, 480, tigrRGB(0,255,255));
+    tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
 
 }
 
@@ -95,7 +123,7 @@ void gameOver(Tigr* screen, GameState* game){
 }
 
 int main() {
-    Tigr* screen = tigrWindow(500, 480, "Project Zero", 0);
+    Tigr* screen = tigrWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Project Zero", 0);
     GameState game;
 
     initGame(screen, &game);
@@ -109,7 +137,7 @@ int main() {
         } else if(game.gameState==3){
             gameOver(screen,&game);
         } else{
-            playing(screen, &game);
+            menu(screen, &game);
         }
         tigrUpdate(screen);
     }
