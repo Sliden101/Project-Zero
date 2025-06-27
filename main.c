@@ -26,19 +26,28 @@ typedef struct {
     float gameTime;
 
     int gameState; //0 = Menu, 1 = Playing, 2 = Paused, 3 = GameOver, 4 = Win
-    
+
     Tigr* playerSprite;
     Tigr* bossSprite;
     Tigr* bulletSprites[3];
 
     AudioSystem audio;
-
+    int currentSongIndex;
+    const char** playList;
+    int playListLength;
 } GameState;
 
 void initGame(Tigr* screen, GameState* game){
+    const char* playList[]={      //playlist
+        "assets/Song1.mp3",
+        "assets/Song2.mp3"
+    };
+    game->playList=playList;
+    game->playListLength=sizeof(playList)/sizeof(playList[0]);
+    game->currentSongIndex=0;
     init_audio(&game->audio);
-    play_bgm(&game->audio, "assets/music.mp3");
-
+    play_bgm(&game->audio,playList[game->currentSongIndex]);
+   
     game->score = 0;
     game->gameState = 0;
 
@@ -127,8 +136,18 @@ int main() {
     GameState game;
 
     initGame(screen, &game);
+  
+    
     
     while (!tigrClosed(screen)) {
+
+    if(!ma_sound_is_playing(&game.audio.bgm)){  // check whether have song end or not 
+     game.currentSongIndex=(game.currentSongIndex+1)% game.playListLength;
+      play_bgm(&game.audio,game.playList[game.currentSongIndex]);
+    }
+
+
+
 
         if(game.gameState==1){
             playing(screen, &game);
