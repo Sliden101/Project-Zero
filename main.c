@@ -17,16 +17,15 @@ void initGame(Tigr* screen, GameState* game){
     game->gameTime = 0;
     
     //Player Init
-    game->player.x = GAME_WIDTH/2;
-    game->player.y = SCREEN_HEIGHT-50;
+    initPlayer(&game->player);
 
-    game->player.hitboxRadius = 3;
-    game->player.lives = 10;
-    game->player.bombs = 3;
-    
-    game->player.invincibleFrames = 0;
-    game->player.focusMode = 0;
-    game->player.color = tigrRGB(0,255,255);
+    //Bullet Init
+
+    initBullets(game->bullets);
+
+    //Boss Init
+
+    // initBoss();
 
 }
 
@@ -45,7 +44,7 @@ int main() {
         } else if(game.gameState==3){
             gameOver(screen,&game);
         } else if (game.gameState==0){
-            playing(screen, &game);
+            menu(screen, &game);
         }
         tigrUpdate(screen);
     }

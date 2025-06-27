@@ -13,8 +13,6 @@ void menu(Tigr* screen, GameState* game){
     rectW = 100;
     rectH = 50;
 
-    rectY = SCREEN_HEIGHT/2;
-
     int x = (screen->w - picture->w) / 2;
     int y = (screen->h - picture->h) / 2;
 
@@ -52,6 +50,10 @@ void playing(Tigr* screen, GameState* game){
 
     drawPlayer(screen,&game->player);
     movePlayer(screen, &game->player);
+    shootAtBoss(screen, &game->player, game->bullets, 0 , 0);
+    drawBullets(screen, game->bullets);
+    updateBullets(game->bullets);
+    
     tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
 
     //Return to menu

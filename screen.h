@@ -4,8 +4,6 @@
 #include "bullet.h"
 #include "audio.h"
 
-#define MAX_BULLETS 2000
-
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 480
 
