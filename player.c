@@ -3,7 +3,7 @@
 
 void drawPlayer(Tigr* screen, Player* player){
    tigrCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
-   tigrFillCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
+   // tigrFillCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
    // drawCircleFill(screen,(int)player->x,(int)player->y,(int)player->hitboxRadius,player->color);
 }
 
@@ -16,14 +16,16 @@ void movePlayer(Tigr* screen,Player* player){
    player->focusMode=0;
   }
    float currentSpeed=(player->focusMode==1)? shift_speed:speed;
-     if(tigrKeyHeld(screen,TK_RIGHT)&&player->x+player->hitboxRadius<300){
+     if(tigrKeyHeld(screen,TK_RIGHT)&&player->x+player->hitboxRadius<(float)(300-3)){
         player->x+=currentSpeed;
      }
      if(tigrKeyHeld(screen,TK_LEFT)&&player->x-player->hitboxRadius > 0){
         player->x-=currentSpeed;
-     }if(tigrKeyHeld(screen,TK_UP)&&player->y-player->hitboxRadius>0){
+     }
+     if(tigrKeyHeld(screen,TK_UP)&&player->y-player->hitboxRadius>0){
         player->y-=currentSpeed;
-     }if(tigrKeyHeld(screen,TK_DOWN)&&player->y+player->hitboxRadius<480){
+     }
+     if(tigrKeyHeld(screen,TK_DOWN)&&player->y+player->hitboxRadius<(float)(480-3)){
         player->y+=currentSpeed;
      }
    }
