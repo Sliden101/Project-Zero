@@ -7,7 +7,7 @@ void initBullets(Bullet* bullets){
     }
 }
 
-void spawnBullets(Bullet bullets[], float x, float y, float angle){
+void spawnBullets(Bullet* bullets, float x, float y, float angle){
     for(int i = 0; i< MAX_BULLETS; i++){
         if(!bullets[i].active){
             bullets[i].x = x;
