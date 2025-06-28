@@ -52,3 +52,9 @@ bool checkCollision(float x1, float y1, float r1, float x2, float y2, float r2) 
     float radiusSum = r1 + r2;
     return distanceSquared <= (radiusSum * radiusSum);
 }
+
+void bombClear(Bullet* bullets){
+    for(int i = 0; i<MAX_BULLETS;i++){
+        bullets[i].active = 0;
+    }
+}

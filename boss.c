@@ -22,7 +22,7 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
             if (boss->patternTimer % 5 == 0) {
                 float angle = boss->patternTimer * 0.1f;
                 for (int i = 0; i < 3; i++) {
-                    spawnBossBullet(bullets, 10, boss->x, boss->y, angle + i * (2*M_PI/3));
+                    spawnBossBullet(bullets, 10, boss->x, boss->y, angle + i * (2*M_PI/3), PHASE_ONE_SPEED);
                 }
             }
             break;
@@ -30,9 +30,9 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
         case 2:
             if (boss->patternTimer % 30 == 0) {
                 float aimAngle = atan2f(playerY - boss->y, playerX - boss->x);
-                spawnBossBullet(bullets, 20, boss->x, boss->y, aimAngle);
+                spawnBossBullet(bullets, 20, boss->x, boss->y, aimAngle, PHASE_TWO_SPEED);
                 for (int i = 0; i < 8; i++) {
-                    spawnBossBullet(bullets, 20, boss->x, boss->y, i * (2*M_PI/8));
+                    spawnBossBullet(bullets, 20, boss->x, boss->y, i * (2*M_PI/8), PHASE_TWO_SPEED);
                 }
             }
             break;
@@ -52,14 +52,14 @@ void drawBoss(Tigr* screen, Boss* boss) {
                 tigrRGB(255 * (1-healthPercent), 255 * healthPercent, 0));
 }
 
-void spawnBossBullet(Bullet* bullets, int size, float x, float y, float angle) {
+void spawnBossBullet(Bullet* bullets, int size, float x, float y, float angle, float speed) {
     for (int i = 0; i < MAX_BULLETS; i++) {
         if (!bullets[i].active) {
             bullets[i] = (Bullet){
                 .x = x,
                 .y = y,
-                .dx = cosf(angle) * BULLET_SPEED,
-                .dy = sinf(angle) * BULLET_SPEED,
+                .dx = cosf(angle) * speed,
+                .dy = sinf(angle) * speed,
                 .size = size,
                 .active = 1,
                 .damage = 1,

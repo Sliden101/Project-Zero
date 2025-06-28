@@ -15,6 +15,7 @@ typedef struct {
 } Bullet;
 
 void initBullets(Bullet* bullets);
+void bombClear(Bullet* bullets);
 void spawnBullets(Bullet* bullets,int size, float x, float y, float angle);
 void updateBullets(Bullet* bullets);
 void drawBullets(Tigr* screen, Bullet* bullets);

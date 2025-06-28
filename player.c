@@ -6,11 +6,11 @@ void initPlayer(Player* player){
    *player = (Player){
       .x = 300/2,
       .y = 480-50,
-      .hitboxRadius = 5.0f,
+      .hitboxRadius = 3.0f,
       .lives = 10,
       .bombs = 3,
       .color = tigrRGB(0, 255, 255),
-      .shootDelay = 10,
+      .shootDelay = 20,
       .shootCooldown = 0,
    };
 }

@@ -51,7 +51,7 @@ void playing(Tigr* screen, GameState* game){
     sprintf(score,"SCORE %d",game->score);
     sprintf(lives,"LIVES %d",game->player.lives);
 
-    tigrClear(screen, tigrRGB(255, 0, 0));
+    tigrClear(screen, tigrRGB(0, 0, 0));
     tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-200,tigrRGB(0,0,255),lives); 
@@ -70,6 +70,14 @@ void playing(Tigr* screen, GameState* game){
 
     drawBullets(screen, game->bossBullets);
     drawBoss(screen, &game->boss);
+
+    if(tigrKeyDown(screen, 'X')&&game->player.bombs>0){
+      bombClear(game->bossBullets);
+      game->player.bombs--;
+    }
+
+
+
    
 
     for(int i = 0; i <MAX_BULLETS; i++){
