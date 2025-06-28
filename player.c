@@ -52,7 +52,7 @@ void shootAtBoss(Tigr* screen,Player* player, Bullet* bullets, float bossX, floa
 
    if(tigrKeyHeld(screen, 'Z')){
       float angle = atan2f(bossY - player->y, bossX - player->x);
-      spawnBullets(bullets, player->x, player->y, angle);
+      spawnBullets(bullets, 3, player->x, player->y, angle);
    }
 
    player->shootCooldown = player->shootDelay;

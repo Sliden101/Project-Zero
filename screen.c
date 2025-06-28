@@ -79,7 +79,7 @@ void playing(Tigr* screen, GameState* game){
       printf("Player bullet hit boss! Lives: %d\n", game->boss.health);
             game->score += 10;
         }
-         if(game->bossBullets[i].active&&checkCollision(game->bossBullets[i].x, game->bossBullets[i].y, 3, game->player.x, game->player.y, game->player.hitboxRadius)){
+         if(game->bossBullets[i].active&&checkCollision(game->bossBullets[i].x, game->bossBullets[i].y, game->bossBullets[i].size, game->player.x, game->player.y, game->player.hitboxRadius)){
             game->player.lives--;
             game->bossBullets[i].active=0;
       printf("Boss bullet hit boss! Lives: %d\n", game->player.lives);

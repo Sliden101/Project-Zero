@@ -8,13 +8,14 @@ void initBullets(Bullet* bullets){
     }
 }
 
-void spawnBullets(Bullet* bullets, float x, float y, float angle){
+void spawnBullets(Bullet* bullets, int size, float x, float y, float angle){
     for(int i = 0; i< MAX_BULLETS; i++){
         if(!bullets[i].active){
             bullets[i].x = x;
             bullets[i].y = y;
             bullets[i].dx = cosf(angle) * BULLET_SPEED;
             bullets[i].dy = sinf(angle) * BULLET_SPEED;
+            bullets[i].size = size;
             bullets[i].active = 1;
             bullets[i].damage = 100;
             return;
@@ -39,7 +40,7 @@ void updateBullets(Bullet* bullets){
 void drawBullets(Tigr* screen, Bullet* bullets){
     for(int i = 0; i<MAX_BULLETS;i++){
         if(bullets[i].active){
-            tigrFillCircle(screen, bullets[i].x, bullets[i].y, 3, tigrRGB(248,216,49));
+            tigrFillCircle(screen, bullets[i].x, bullets[i].y, bullets[i].size, tigrRGB(248,216,49));
         }
     }
 }

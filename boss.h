@@ -19,4 +19,4 @@ typedef struct {
 void initBoss(Boss* boss);
 void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY);
 void drawBoss(Tigr* screen, Boss* boss);
-void spawnBossBullet(Bullet* bullets, float x, float y, float angle);
+void spawnBossBullet(Bullet* bullets, int size,float x, float y, float angle);
