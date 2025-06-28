@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include "tigr.h"
 #include "screen.h"
 
@@ -45,8 +46,15 @@ void menu(Tigr* screen, GameState* game){
 
 
 void playing(Tigr* screen, GameState* game){
+    char score[50];
+    char lives[50];
+    sprintf(score,"SCORE %d",game->score);
+    sprintf(lives,"LIVES %d",game->player.lives);
+
     tigrClear(screen, tigrRGB(255, 0, 0));
     tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-200,tigrRGB(0,0,255),lives); 
 
 
     drawPlayer(screen,&game->player);
@@ -62,24 +70,50 @@ void playing(Tigr* screen, GameState* game){
 
     drawBullets(screen, game->bossBullets);
     drawBoss(screen, &game->boss);
+   
 
     for(int i = 0; i <MAX_BULLETS; i++){
-        if(game->bullets[i].active && checkCollision(game->bullets[i].x, game->bullets[i].y, 3, game->boss.x, game->boss.y, game->boss.hitboxRadius)){
+        if(game->bullets[i].active&&checkCollision(game->bullets[i].x, game->bullets[i].y, 3, game->boss.x, game->boss.y, game->boss.hitboxRadius)){
             game->boss.health -= game->bullets[i].damage;
             game->bullets[i].active = 0;
-
+      printf("Player bullet hit boss! Lives: %d\n", game->boss.health);
             game->score += 10;
         }
+         if(game->bossBullets[i].active&&checkCollision(game->bossBullets[i].x, game->bossBullets[i].y, 3, game->player.x, game->player.y, game->player.hitboxRadius)){
+            game->player.lives--;
+            game->bossBullets[i].active=0;
+      printf("Boss bullet hit boss! Lives: %d\n", game->player.lives);
+        }
     }
+
+    
+    
+
+
+    if(game->player.lives==0){
+        game->gameState=3;
+    }
+
 
 
     //Return to menu
     if(tigrKeyDown(screen, 'B')){
         game->gameState=0;
     }
+    if(tigrKeyDown(screen,'P')){
+        game->gameState=2;
+    }
 }
 
 void paused(Tigr* screen, GameState* game){
+    if(tigrKeyDown(screen,'P')){
+        game->gameState=1;
+    }
+     tigrRect(screen,SCREEN_WIDTH/2-165,SCREEN_HEIGHT/2-60,130,40,tigrRGB(0,255,255));
+     tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(20,20,20));
+     tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(50,50,50));
+
+     tigrPrint(screen,tfont,SCREEN_WIDTH/2-120,SCREEN_HEIGHT/2-45,tigrRGB(0,255,255),"PAUSED");
 
 }
 void gameOver(Tigr* screen, GameState* game){

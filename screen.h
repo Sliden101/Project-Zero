@@ -15,7 +15,7 @@ typedef struct {
 
     Boss boss;
     Bullet bossBullets[MAX_BULLETS];
-
+   
     int score;
     int highScore;
     int phase;

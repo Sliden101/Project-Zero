@@ -1,4 +1,5 @@
 #include "bullet.h"
+#include <stdbool.h>
 #include "math.h"
 
 void initBullets(Bullet* bullets){
@@ -43,10 +44,10 @@ void drawBullets(Tigr* screen, Bullet* bullets){
     }
 }
 
-int checkCollision(float x1, float y1, float r1, float x2, float y2, float r2) {
+bool checkCollision(float x1, float y1, float r1, float x2, float y2, float r2) {
     float dx = x1 - x2;
     float dy = y1 - y2;
     float distanceSquared = dx*dx + dy*dy;
     float radiusSum = r1 + r2;
-    return distanceSquared < (radiusSum * radiusSum);
+    return distanceSquared <= (radiusSum * radiusSum);
 }
