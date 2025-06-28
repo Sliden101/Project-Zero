@@ -18,14 +18,11 @@ void initGame(Tigr* screen, GameState* game){
     
     //Player Init
     initPlayer(&game->player);
-
-    //Bullet Init
-
     initBullets(game->bullets);
 
     //Boss Init
-
-    // initBoss();
+    initBoss(&game->boss);
+    initBullets(game->bossBullets);
 
 }
 

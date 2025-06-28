@@ -46,15 +46,32 @@ void menu(Tigr* screen, GameState* game){
 
 void playing(Tigr* screen, GameState* game){
     tigrClear(screen, tigrRGB(255, 0, 0));
+    tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
 
 
     drawPlayer(screen,&game->player);
     movePlayer(screen, &game->player);
-    shootAtBoss(screen, &game->player, game->bullets, 0 , 0);
-    drawBullets(screen, game->bullets);
+
+    shootAtBoss(screen, &game->player, game->bullets, game->boss.x , game->boss.y);
     updateBullets(game->bullets);
+    drawBullets(screen, game->bullets);
     
-    tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
+
+    updateBoss(&game->boss, game->bossBullets, game->player.x, game->player.y);
+    updateBullets(game->bossBullets);
+
+    drawBullets(screen, game->bossBullets);
+    drawBoss(screen, &game->boss);
+
+    for(int i = 0; i <MAX_BULLETS; i++){
+        if(game->bullets[i].active && checkCollision(game->bullets[i].x, game->bullets[i].y, 3, game->boss.x, game->boss.y, game->boss.hitboxRadius)){
+            game->boss.health -= game->bullets[i].damage;
+            game->bullets[i].active = 0;
+
+            game->score += 10;
+        }
+    }
+
 
     //Return to menu
     if(tigrKeyDown(screen, 'B')){
