@@ -48,13 +48,16 @@ void menu(Tigr* screen, GameState* game){
 void playing(Tigr* screen, GameState* game){
     char score[50];
     char lives[50];
+    char bomb[50];
     sprintf(score,"SCORE %d",game->score);
-    sprintf(lives,"LIVES %d",game->player.lives);
+    sprintf(lives,"Lives Left: %d",game->player.lives);
+    sprintf(bomb,"Bombs Left: %d",game->player.bombs);
 
     tigrClear(screen, tigrRGB(0, 0, 0));
     tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-200,tigrRGB(0,0,255),lives); 
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-180,tigrRGB(0,0,255),bomb); 
 
 
     drawPlayer(screen,&game->player);
@@ -101,7 +104,6 @@ void playing(Tigr* screen, GameState* game){
     if(game->player.lives==0){
         game->gameState=3;
     }
-
 
 
     //Return to menu

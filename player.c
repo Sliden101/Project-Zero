@@ -10,7 +10,7 @@ void initPlayer(Player* player){
       .lives = 10,
       .bombs = 3,
       .color = tigrRGB(0, 255, 255),
-      .shootDelay = 20,
+      .shootDelay = 10,
       .shootCooldown = 0,
    };
 }
@@ -22,13 +22,13 @@ void drawPlayer(Tigr* screen, Player* player){
 }
 
 void movePlayer(Tigr* screen,Player* player){
-  float speed=3.0f; float shift_speed=1.0f;
-  if(tigrKeyHeld(screen,TK_SHIFT)){
-     player->focusMode=1;
-  }
-  else {
-   player->focusMode=0;
-  }
+   float speed=3.0f; float shift_speed=1.0f;
+   if(tigrKeyHeld(screen,TK_SHIFT)){
+      player->focusMode=1;
+   }
+   else {
+      player->focusMode=0;
+   }
    float currentSpeed=(player->focusMode==1)? shift_speed:speed;
      if(tigrKeyHeld(screen,TK_RIGHT)&&player->x+player->hitboxRadius<(float)(300-3)){
         player->x+=currentSpeed;
@@ -45,6 +45,11 @@ void movePlayer(Tigr* screen,Player* player){
 }
    
 void shootAtBoss(Tigr* screen,Player* player, Bullet* bullets, float bossX, float bossY){
+   if(player->focusMode==1){
+      player->shootDelay = 5;
+   } else {
+      player->shootDelay = 10;
+   }
    if(player->shootCooldown>0){
       player->shootCooldown--;
       return; // Skip basically
