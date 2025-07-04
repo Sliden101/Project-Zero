@@ -10,7 +10,7 @@ void initGame(Tigr* screen, GameState* game){
     play_bgm(&game->audio, "assets/projectzero.mp3");
 
     game->score = 0;
-    game->gameState = 4;
+    game->gameState = 0;
 
     game->phase = 1;
     game->frameCount = 0;

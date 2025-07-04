@@ -121,9 +121,8 @@ void paused(Tigr* screen, GameState* game){
     if(tigrKeyDown(screen,'P')){
         game->gameState=1;
     }
-    tigrRect(screen,SCREEN_WIDTH/2-165,SCREEN_HEIGHT/2-60,130,40,tigrRGB(0,255,255));
-    tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(20,20,20));
-    tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(50,50,50));
+    tigrFill(screen, 0, 0, GAME_WIDTH+10, SCREEN_HEIGHT, tigrRGB(20,20,20));
+    tigrFill(screen, 0, 0, GAME_WIDTH+10, SCREEN_HEIGHT, tigrRGB(50,50,50));
 
     tigrPrint(screen,tfont,SCREEN_WIDTH/2-120,SCREEN_HEIGHT/2-45,tigrRGB(0,255,255),"PAUSED");
 
