@@ -17,7 +17,7 @@ void spawnBullets(Bullet* bullets, int size, float x, float y, float angle){
             bullets[i].dy = sinf(angle) * BULLET_SPEED;
             bullets[i].size = size;
             bullets[i].active = 1;
-            bullets[i].damage = 100;
+            bullets[i].damage = PLAYER_DAMAGE;
             return;
         }
     }

@@ -10,7 +10,7 @@ void initGame(Tigr* screen, GameState* game){
     play_bgm(&game->audio, "assets/projectzero.mp3");
 
     game->score = 0;
-    game->gameState = 0;
+    game->gameState = 4;
 
     game->phase = 1;
     game->frameCount = 0;
@@ -33,15 +33,17 @@ int main() {
     initGame(screen, &game);
     
     while (!tigrClosed(screen)) {
-
-        if(game.gameState==1){
+        if (game.gameState==0){
+            menu(screen, &game);
+        }
+        else if(game.gameState==1){
             playing(screen, &game);
         } else if(game.gameState==2){
             paused(screen, &game);
         } else if(game.gameState==3){
             gameOver(screen,&game);
-        } else if (game.gameState==0){
-            menu(screen, &game);
+        } else if (game.gameState==4){
+            win(screen, &game);
         }
         tigrUpdate(screen);
     }

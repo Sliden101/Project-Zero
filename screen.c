@@ -46,22 +46,26 @@ void menu(Tigr* screen, GameState* game){
 
 
 void playing(Tigr* screen, GameState* game){
+
+    //Screen
+    tigrClear(screen, tigrRGB(0, 0, 0));
+    tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
+    //Show Stats
     char score[50];
     char lives[50];
     char bomb[50];
     sprintf(score,"SCORE %d",game->score);
     sprintf(lives,"Lives Left: %d",game->player.lives);
     sprintf(bomb,"Bombs Left: %d",game->player.bombs);
-
-    tigrClear(screen, tigrRGB(0, 0, 0));
-    tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-200,tigrRGB(0,0,255),lives); 
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-180,tigrRGB(0,0,255),bomb); 
 
-
+    //Player
     drawPlayer(screen,&game->player);
     movePlayer(screen, &game->player);
+
+    //Boss
 
     shootAtBoss(screen, &game->player, game->bullets, game->boss.x , game->boss.y);
     updateBullets(game->bullets);
@@ -75,34 +79,32 @@ void playing(Tigr* screen, GameState* game){
     drawBoss(screen, &game->boss);
 
     if(tigrKeyDown(screen, 'X')&&game->player.bombs>0){
-      bombClear(game->bossBullets);
-      game->player.bombs--;
+        bombClear(game->bossBullets);
+        game->player.bombs--;
     }
-
-
-
-   
 
     for(int i = 0; i <MAX_BULLETS; i++){
         if(game->bullets[i].active&&checkCollision(game->bullets[i].x, game->bullets[i].y, 3, game->boss.x, game->boss.y, game->boss.hitboxRadius)){
             game->boss.health -= game->bullets[i].damage;
             game->bullets[i].active = 0;
-      printf("Player bullet hit boss! Lives: %d\n", game->boss.health);
+            printf("Player bullet hit boss! Health: %d\n", game->boss.health);
             game->score += 10;
         }
-         if(game->bossBullets[i].active&&checkCollision(game->bossBullets[i].x, game->bossBullets[i].y, game->bossBullets[i].size, game->player.x, game->player.y, game->player.hitboxRadius)){
+        if(game->bossBullets[i].active&&checkCollision(game->bossBullets[i].x, game->bossBullets[i].y, game->bossBullets[i].size, game->player.x, game->player.y, game->player.hitboxRadius)){
             game->player.lives--;
             game->bossBullets[i].active=0;
-      printf("Boss bullet hit boss! Lives: %d\n", game->player.lives);
+            printf("Boss bullet hit Player! Lives: %d\n", game->player.lives);
         }
     }
-
     
-    
-
-
+    //Gameover
     if(game->player.lives==0){
         game->gameState=3;
+    }
+
+    //Win Condition
+    if(game->boss.health==0){
+        game->gameState=4;
     }
 
 
@@ -119,11 +121,11 @@ void paused(Tigr* screen, GameState* game){
     if(tigrKeyDown(screen,'P')){
         game->gameState=1;
     }
-     tigrRect(screen,SCREEN_WIDTH/2-165,SCREEN_HEIGHT/2-60,130,40,tigrRGB(0,255,255));
-     tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(20,20,20));
-     tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(50,50,50));
+    tigrRect(screen,SCREEN_WIDTH/2-165,SCREEN_HEIGHT/2-60,130,40,tigrRGB(0,255,255));
+    tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(20,20,20));
+    tigrFill(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(50,50,50));
 
-     tigrPrint(screen,tfont,SCREEN_WIDTH/2-120,SCREEN_HEIGHT/2-45,tigrRGB(0,255,255),"PAUSED");
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2-120,SCREEN_HEIGHT/2-45,tigrRGB(0,255,255),"PAUSED");
 
 }
 void gameOver(Tigr* screen, GameState* game){
@@ -136,7 +138,24 @@ void gameOver(Tigr* screen, GameState* game){
     tigrFree(picture);
 }
 
-void win(Tigr* screen, GameState* game);
+void win(Tigr* screen, GameState* game){
+    Tigr* picture = tigrLoadImage("assets/win.png");
+
+    int x = (screen->w - picture->w) / 2;
+    int y = (screen->h - picture->h) / 2;
+
+    tigrBlit(screen, picture, x, y, 0, 0, picture->w, picture->h);
+
+    //Stage Clear
+    tigrPrint(screen,tfont,SCREEN_WIDTH/4+90,SCREEN_HEIGHT/2-220,tigrRGB(252,163,17),"STAGE CLEAR");
+
+    char score[50];
+    sprintf(score,"SCORE %d",game->score);
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
+
+    tigrFree(picture);
+
+}
 
 void cleanUpGame(GameState* game){
     shutdown_audio(&game->audio);
