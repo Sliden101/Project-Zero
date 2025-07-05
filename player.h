@@ -1,3 +1,5 @@
+#ifndef PLAYER_H
+#define PLAYER_H
 #include "tigr.h"
 #include "bullet.h"
 
@@ -17,3 +19,5 @@ void initPlayer(Player* player);
 void drawPlayer(Tigr* screen, Player* player); // initialize player
 void movePlayer(Tigr* screen,Player* player); // movement
 void shootAtBoss(Tigr* screen, Player* player, Bullet* bullets, float bossX, float bossY); 
+
+#endif

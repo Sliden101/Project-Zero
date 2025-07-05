@@ -1,8 +1,11 @@
+#ifndef SCREEN_H
+#define SCREEN_H
 #include "tigr.h"
 #include "player.h"
 #include "boss.h"
 #include "bullet.h"
 #include "audio.h"
+#include "highScore.h"
 
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 480
@@ -12,12 +15,10 @@
 typedef struct {
     Player player;
     Bullet bullets[MAX_BULLETS];
-
     Boss boss;
     Bullet bossBullets[MAX_BULLETS];
-   
+    HIGHSCORE highScore;
     int score;
-    int highScore;
     int phase;
     int frameCount;
     float gameTime;
@@ -37,3 +38,5 @@ void paused(Tigr* screen, GameState* game);
 void gameOver(Tigr* screen, GameState* game);
 void win(Tigr* screen, GameState* game);
 void cleanUpGame(GameState* game);
+
+#endif

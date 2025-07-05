@@ -3,7 +3,7 @@
 #include "audio.h"
 #include "miniaudio.h"
 #include "screen.h"
-
+    
 void initGame(Tigr* screen, GameState* game){
 
     init_audio(&game->audio);

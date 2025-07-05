@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include "tigr.h"
 #include "screen.h"
+#include "highScore.h"
 
 void menu(Tigr* screen, GameState* game){
     Tigr* picture = tigrLoadImage("assets/menu.png");
@@ -48,19 +49,22 @@ void menu(Tigr* screen, GameState* game){
 void playing(Tigr* screen, GameState* game){
 
     //Screen
+    getHighScore(&game->highScore);
     tigrClear(screen, tigrRGB(0, 0, 0));
     tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
     //Show Stats
     char score[50];
     char lives[50];
     char bomb[50];
+    char highScore[50];
     sprintf(score,"SCORE %d",game->score);
     sprintf(lives,"Lives Left: %d",game->player.lives);
     sprintf(bomb,"Bombs Left: %d",game->player.bombs);
+    sprintf(highScore,"High Score  %d",game->highScore);
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-200,tigrRGB(0,0,255),lives); 
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-180,tigrRGB(0,0,255),bomb); 
-
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-160,tigrRGB(0,255,255),highScore);
     //Player
     drawPlayer(screen,&game->player);
     movePlayer(screen, &game->player);
@@ -77,6 +81,9 @@ void playing(Tigr* screen, GameState* game){
 
     drawBullets(screen, game->bossBullets);
     drawBoss(screen, &game->boss);
+
+    saveHighScore(&game->highScore,game->score);
+
 
     if(tigrKeyDown(screen, 'X')&&game->player.bombs>0){
         bombClear(game->bossBullets);
@@ -134,6 +141,7 @@ void gameOver(Tigr* screen, GameState* game){
     int y = (screen->h - picture->h) / 2;
 
     tigrBlit(screen, picture, x, y, 0, 0, picture->w, picture->h);
+    saveHighScore(&game->highScore,game->score);
     tigrFree(picture);
 }
 
@@ -151,6 +159,8 @@ void win(Tigr* screen, GameState* game){
     char score[50];
     sprintf(score,"SCORE %d",game->score);
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
+    saveHighScore(&game->highScore,game->score);
+
 
     tigrFree(picture);
 
