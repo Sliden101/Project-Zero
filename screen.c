@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "tigr.h"
 #include "screen.h"
-#include "highScore.h"
+#include "highscore.h"
 
 void menu(Tigr* screen, GameState* game){
     Tigr* picture = tigrLoadImage("assets/menu.png");
@@ -105,12 +105,12 @@ void playing(Tigr* screen, GameState* game){
     }
     
     //Gameover
-    if(game->player.lives==0){
+    if(game->player.lives<=0){
         game->gameState=3;
     }
 
     //Win Condition
-    if(game->boss.health==0){
+    if(game->boss.health<=0){
         game->gameState=4;
     }
 

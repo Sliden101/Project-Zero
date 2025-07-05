@@ -6,10 +6,10 @@
  
 typedef struct{
     int high_score;
- } HIGHSCORE;
+ } Highscore;
 
-int getHighScore(HIGHSCORE* highScore );
-void saveHighScore(HIGHSCORE* highScore, int newScore);
+int getHighScore(Highscore* highScore );
+void saveHighScore(Highscore* highScore, int newScore);
 
 
 #endif

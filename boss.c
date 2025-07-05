@@ -13,7 +13,8 @@ void initBoss(Boss* boss) {
         .phase = 1,
         .patternTimer = 0,
         .movementTimer = 0,
-        .moveDirection = 1,
+        .moveXDirection = 1,
+        .moveYDirection = 1,
         .color = tigrRGB(200, 50, 50)
     };
 }
@@ -25,16 +26,17 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
     //Movement
     if (boss->movementTimer % 10 == 0) {
         if (rand() % 2 == 0 || boss->x < 50) {
-            boss->moveDirection = 1; // Right
+            boss->moveXDirection = 1; // Right
         } else if (boss->x > 200) {
-            boss->moveDirection = -1; // Left
+            boss->moveXDirection = -1; // Left
         }
     }
     
-    boss->x += boss->moveDirection * 1.5f;
+    boss->x += boss->moveXDirection * 1.5f;
 
     if (boss->x < 20) boss->x = 20;
     if (boss->x > 280) boss->x = 280;
+
 
     //Implement rectangle
 

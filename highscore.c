@@ -1,8 +1,8 @@
-#include "highScore.h"
+#include "highscore.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-int getHighScore(HIGHSCORE* highScore){
+int getHighScore(Highscore* highScore){
     FILE *file=fopen(HIGH_SCORE_FILE,"r");
     if(file!=NULL){
        fscanf(file,"%d",&highScore->high_score);
@@ -17,7 +17,7 @@ int getHighScore(HIGHSCORE* highScore){
     return highScore->high_score;
 }
 
-void saveHighScore(HIGHSCORE* highScore,int newScore){
+void saveHighScore(Highscore* highScore,int newScore){
     getHighScore(highScore);
    if(newScore>highScore->high_score){
          FILE *file=fopen(HIGH_SCORE_FILE,"w");

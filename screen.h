@@ -5,7 +5,7 @@
 #include "boss.h"
 #include "bullet.h"
 #include "audio.h"
-#include "highScore.h"
+#include "highscore.h"
 
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 480
@@ -17,7 +17,8 @@ typedef struct {
     Bullet bullets[MAX_BULLETS];
     Boss boss;
     Bullet bossBullets[MAX_BULLETS];
-    HIGHSCORE highScore;
+    Highscore highScore;
+
     int score;
     int phase;
     int frameCount;

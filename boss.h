@@ -3,7 +3,7 @@
 #include "bullet.h"
 #include "math.h"
 
-#define BOSS_HEALTH 4000
+#define BOSS_HEALTH 8000
 #define BOSS_HITBOX_RADIUS 10
 #define PHASE_ONE_SPEED 2.0f
 #define PHASE_TWO_SPEED 2.5f
@@ -17,7 +17,8 @@ typedef struct {
     int phase;
     int patternTimer;
     int movementTimer;
-    int moveDirection;    
+    int moveXDirection;    
+    int moveYDirection;
     TPixel color;
 } Boss;
 

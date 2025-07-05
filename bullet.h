@@ -4,8 +4,8 @@
 #include <stdbool.h>
 
 #define MAX_BULLETS 2000
-#define BULLET_SPEED 8.0f
-#define PLAYER_DAMAGE 1000
+#define BULLET_SPEED 10.0f
+#define PLAYER_DAMAGE 100
 
 typedef struct {
     float x, y;
