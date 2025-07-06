@@ -1,0 +1,43 @@
+{
+    "app-id" : "pro.sliden.ProjectZero",
+    "runtime" : "org.freedesktop.Platform",
+    "runtime-version" : "25.08beta",
+    "sdk" : "org.freedesktop.Sdk",
+    "command" : "Project-Zero",
+    "finish-args" : [
+        "--share=ipc",
+        "--socket=x11",
+        "--device=dri",
+        "--socket=pulseaudio"
+    ],
+    "cleanup" : [
+        "/include",
+        "/lib/pkgconfig",
+        "/man",
+        "/share/doc",
+        "/share/gtk-doc",
+        "/share/man",
+        "/share/pkgconfig",
+        "*.la",
+        "*.a"
+    ],
+    "modules" : [
+        {
+            "name" : "Project_Zero",
+            "builddir" : true,
+            "buildsystem" : "meson",
+            "sources" : [
+                {
+                    "type" : "git",
+                    "url" : "https://github.com/Sliden101/Project-Zero.git"
+                }
+            ],
+            "config-opts" : [
+                "--libdir=lib"
+            ]
+        }
+    ],
+    "build-options" : {
+        "env" : {        }
+    }
+}

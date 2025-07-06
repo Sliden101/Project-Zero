@@ -7,7 +7,7 @@
 void initGame(Tigr* screen, GameState* game){
 
     init_audio(&game->audio);
-    play_bgm(&game->audio, "assets/projectzero.mp3");
+    play_bgm(&game->audio, ASSET_DIR "/projectzero.mp3");
 
     game->score = 0;
     game->gameState = 0;

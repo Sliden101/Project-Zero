@@ -4,7 +4,7 @@
 #include "highscore.h"
 
 void menu(Tigr* screen, GameState* game){
-    Tigr* picture = tigrLoadImage("assets/menu.png");
+    Tigr* picture = tigrLoadImage(ASSET_DIR "/menu.png");
 
     int playRectX, quitRectX, rectY, rectW, rectH;
 
@@ -135,7 +135,7 @@ void paused(Tigr* screen, GameState* game){
 
 }
 void gameOver(Tigr* screen, GameState* game){
-    Tigr* picture = tigrLoadImage("assets/gameover.png");
+    Tigr* picture = tigrLoadImage(ASSET_DIR "/gameover.png");
 
     int x = (screen->w - picture->w) / 2;
     int y = (screen->h - picture->h) / 2;
@@ -146,7 +146,7 @@ void gameOver(Tigr* screen, GameState* game){
 }
 
 void win(Tigr* screen, GameState* game){
-    Tigr* picture = tigrLoadImage("assets/win.png");
+    Tigr* picture = tigrLoadImage(ASSET_DIR "/win.png");
 
     int x = (screen->w - picture->w) / 2;
     int y = (screen->h - picture->h) / 2;
