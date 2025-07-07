@@ -8,9 +8,21 @@ project(
 
 dependencies = [
   dependency('miniaudio'),
-  dependency('GL'),
-  dependency('X11'),
 ]
+
+if host_machine.system() == 'linux'
+  dependencies += [
+    dependency('GL'),
+    dependency('X11'),
+  ]
+elif host_machine.system() == 'windows'
+  dependencies += [
+    dependency('opengl32'),
+    dependency('gdi32'),
+  ]
+else
+  error(host_machine.system() + ' currently not supported')
+endif
 
 sources = [
   'audio.c',
