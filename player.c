@@ -16,7 +16,9 @@ void initPlayer(Player* player){
 }
 
 void drawPlayer(Tigr* screen, Player* player){
+   Tigr* picture=tigrLoadImage("assets/sprite.png");
    tigrCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
+   tigrBlit(screen,picture,player->x-60,player->y-70,0,0,picture->w,picture->h);
    // tigrFillCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
    // drawCircleFill(screen,(int)player->x,(int)player->y,(int)player->hitboxRadius,player->color);
 }
