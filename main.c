@@ -28,6 +28,7 @@ void initGame(Tigr* screen, GameState* game){
 
 int main() {
     Tigr* screen = tigrWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Project Zero", 0);
+
     GameState game;
 
     initGame(screen, &game);

@@ -49,6 +49,8 @@ void menu(Tigr* screen, GameState* game){
 void playing(Tigr* screen, GameState* game){
 
     //Screen
+   // Tigr* picture=tigrLoadImage("assets/background.png");
+  //  tigrBlit(screen,picture,0,0,0,0,picture->w,picture->h);
     getHighScore(&game->highScore);
     tigrClear(screen, tigrRGB(0, 0, 0));
     tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
@@ -122,6 +124,7 @@ void playing(Tigr* screen, GameState* game){
     if(tigrKeyDown(screen,'P')){
         game->gameState=2;
     }
+  //  tigrFree(picture);
 }
 
 void paused(Tigr* screen, GameState* game){

@@ -4,8 +4,8 @@
 
 void initPlayer(Player* player){
    *player = (Player){
-      .x = 300/2,
-      .y = 480-50,
+      .x = 285/2,
+      .y = 480-60,
       .hitboxRadius = 3.0f,
       .lives = 10,
       .bombs = 3,
@@ -18,7 +18,7 @@ void initPlayer(Player* player){
 void drawPlayer(Tigr* screen, Player* player){
    Tigr* picture=tigrLoadImage("assets/sprite.png");
    tigrCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
-   tigrBlit(screen,picture,player->x-60,player->y-70,0,0,picture->w,picture->h);
+   tigrBlit(screen,picture,player->x-10,player->y-10,0,0,picture->w,picture->h);
    // tigrFillCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
    // drawCircleFill(screen,(int)player->x,(int)player->y,(int)player->hitboxRadius,player->color);
 }
@@ -32,20 +32,20 @@ void movePlayer(Tigr* screen,Player* player){
       player->focusMode=0;
    }
    float currentSpeed=(player->focusMode==1)? shift_speed:speed;
-     if(tigrKeyHeld(screen,TK_RIGHT)&&player->x+player->hitboxRadius<(float)(300-3)){
+     if(tigrKeyHeld(screen,TK_RIGHT)&&player->x+player->hitboxRadius<(float)(265-3)){
         player->x+=currentSpeed;
      }
-     if(tigrKeyHeld(screen,TK_LEFT)&&player->x-player->hitboxRadius > 0){
+     if(tigrKeyHeld(screen,TK_LEFT)&&player->x-player->hitboxRadius >10){
         player->x-=currentSpeed;
      }
-     if(tigrKeyHeld(screen,TK_UP)&&player->y-player->hitboxRadius>0){
+     if(tigrKeyHeld(screen,TK_UP)&&player->y-player->hitboxRadius>10){
         player->y-=currentSpeed;
      }
-     if(tigrKeyHeld(screen,TK_DOWN)&&player->y+player->hitboxRadius<(float)(480-3)){
+     if(tigrKeyHeld(screen,TK_DOWN)&&player->y+player->hitboxRadius<(float)(425-3)){
         player->y+=currentSpeed;
      }
 }
-   
+
 void shootAtBoss(Tigr* screen,Player* player, Bullet* bullets, float bossX, float bossY){
    if(player->focusMode==1){
       player->shootDelay = 5;
