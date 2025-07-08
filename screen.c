@@ -142,6 +142,45 @@ void gameOver(Tigr* screen, GameState* game){
 
     tigrBlit(screen, picture, x, y, 0, 0, picture->w, picture->h);
     saveHighScore(&game->highScore,game->score);
+
+
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2 - 165,SCREEN_HEIGHT/2+20, tigrRGB(0,255,255),"RESTART");
+    tigrPrint(screen,tfont,SCREEN_WIDTH/2 + 135,SCREEN_HEIGHT/2+18, tigrRGB(0,255,255),"QUIT");
+
+
+    int playRectX, quitRectX, rectY, rectW, rectH;
+
+    playRectX = SCREEN_WIDTH/2 - 200;
+    quitRectX = SCREEN_WIDTH/2 + 100;
+
+    rectY = SCREEN_HEIGHT/2;
+    rectW = 100;
+    rectH = 50;
+
+
+    int mouseX, mouseY, buttons;
+
+    tigrMouse(screen, &mouseX, &mouseY, &buttons);
+
+    int isOverPlay = mouseX >= playRectX && mouseX < playRectX + rectW && mouseY >= rectY && mouseY < rectY + rectH;
+    if(isOverPlay && (buttons & 1)){
+        game->score = 0;
+        
+        initPlayer(&game->player);
+        bombClear(game->bossBullets);
+        initBoss(&game->boss);
+        game->gameState=1;
+    }
+
+    int isOverQuit = mouseX >= quitRectX && mouseX < quitRectX + rectW && mouseY >= rectY && mouseY < rectY + rectH;
+
+    if(isOverQuit && (buttons & 1)){
+        cleanUpGame(game);
+        tigrFree(screen); 
+    }
+
+
+
     tigrFree(picture);
 }
 
@@ -158,9 +197,8 @@ void win(Tigr* screen, GameState* game){
 
     char score[50];
     sprintf(score,"SCORE %d",game->score);
-    tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
+    tigrPrint(screen,tfont,SCREEN_WIDTH/4+90,SCREEN_HEIGHT/2-200,tigrRGB(0,0,255),score);
     saveHighScore(&game->highScore,game->score);
-
 
     tigrFree(picture);
 

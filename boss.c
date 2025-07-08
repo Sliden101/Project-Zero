@@ -24,7 +24,7 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
     boss->movementTimer++;
 
     //Movement
-    if (boss->movementTimer % 10 == 0) {
+    if (boss->movementTimer % 50 == 0) {
         if (rand() % 2 == 0 || boss->x < 50) {
             boss->moveXDirection = 1; // Right
         } else if (boss->x > 200) {
@@ -32,18 +32,42 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
         }
     }
     
-    boss->x += boss->moveXDirection * 1.5f;
+    boss->x += boss->moveXDirection * 1.0f;
 
     if (boss->x < 20) boss->x = 20;
     if (boss->x > 280) boss->x = 280;
 
 
-    //Implement rectangle
-
     //Attack Patterns
     
     switch (boss->phase) {
-        case 1: 
+        case 1:
+            //Aimed Circle    
+            if (boss->patternTimer % 30 == 0) {
+                float aimAngle = atan2f(playerY - boss->y, playerX - boss->x);
+                spawnBossBullet(bullets, 15, boss->x, boss->y, aimAngle, PHASE_TWO_SPEED);
+                for (int i = 0; i < 8; i++) {
+                    spawnBossBullet(bullets,15, boss->x, boss->y, i * (2*M_PI/8), PHASE_TWO_SPEED);
+                }
+            }
+            break;
+
+    
+
+        case 2:
+            if (boss->patternTimer % 3 == 0) {
+                float angle = -boss->patternTimer * 0.2f;
+                float radius = 5 + (boss->patternTimer % 30) * 0.5f;
+                for (int i = 0; i < 4; i++) {
+                    spawnBossBullet(bullets, 6, 
+                                   boss->x + cosf(angle + i*M_PI/2) * radius,
+                                   boss->y + sinf(angle + i*M_PI/2) * radius,
+                                   angle + i*M_PI/2, PHASE_THREE_SPEED);
+                }
+            }
+            break;
+
+        case 3: 
             //Spiral
             if (boss->patternTimer % 5 == 0) {
                 float angle = boss->patternTimer * 0.1f;
@@ -59,29 +83,6 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
                 }
             }
             break;
-        
-        case 2:
-            //Aimed Circle    
-            if (boss->patternTimer % 30 == 0) {
-                float aimAngle = atan2f(playerY - boss->y, playerX - boss->x);
-                spawnBossBullet(bullets, 15, boss->x, boss->y, aimAngle, PHASE_TWO_SPEED);
-                for (int i = 0; i < 8; i++) {
-                    spawnBossBullet(bullets,15, boss->x, boss->y, i * (2*M_PI/8), PHASE_TWO_SPEED);
-                }
-            }
-            break;
-        case 3:
-            if (boss->patternTimer % 3 == 0) {
-                float angle = -boss->patternTimer * 0.2f;
-                float radius = 5 + (boss->patternTimer % 30) * 0.5f;
-                for (int i = 0; i < 4; i++) {
-                    spawnBossBullet(bullets, 8, 
-                                   boss->x + cosf(angle + i*M_PI/2) * radius,
-                                   boss->y + sinf(angle + i*M_PI/2) * radius,
-                                   angle + i*M_PI/2, PHASE_THREE_SPEED);
-                }
-            }
-
     }
     
     if (boss->health < boss->maxHealth * 0.75f && boss->phase == 1) {
