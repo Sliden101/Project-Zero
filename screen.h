@@ -23,13 +23,13 @@ typedef struct {
     int phase;
     int frameCount;
     float gameTime;
-
+    int bgScrollY;
     int gameState; //0 = Menu, 1 = Playing, 2 = Paused, 3 = GameOver, 4 = Win
 
     Tigr* playerSprite;
     Tigr* bossSprite;
     Tigr* bulletSprites[3];
-
+    Tigr* background;
     AudioSystem audio;
 } GameState;
 
@@ -39,5 +39,5 @@ void paused(Tigr* screen, GameState* game);
 void gameOver(Tigr* screen, GameState* game);
 void win(Tigr* screen, GameState* game);
 void cleanUpGame(GameState* game);
-
+void drawGame(Tigr* screen, GameState* game);
 #endif

@@ -47,13 +47,8 @@ void menu(Tigr* screen, GameState* game){
 
 
 void playing(Tigr* screen, GameState* game){
-
-    //Screen
-   // Tigr* picture=tigrLoadImage("assets/background.png");
-  //  tigrBlit(screen,picture,0,0,0,0,picture->w,picture->h);
+ 
     getHighScore(&game->highScore);
-    tigrClear(screen, tigrRGB(0, 0, 0));
-    tigrRect(screen, 0, 0, GAME_WIDTH, SCREEN_HEIGHT, tigrRGB(0,255,255));
     //Show Stats
     char score[50];
     char lives[50];
@@ -63,6 +58,9 @@ void playing(Tigr* screen, GameState* game){
     sprintf(lives,"Lives Left: %d",game->player.lives);
     sprintf(bomb,"Bombs Left: %d",game->player.bombs);
     sprintf(highScore,"High Score  %d",game->highScore);
+    // background
+    drawGame(screen,game); 
+    // Stat
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-220,tigrRGB(0,0,255),score);
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-200,tigrRGB(0,0,255),lives); 
     tigrPrint(screen,tfont,SCREEN_WIDTH/2+90,SCREEN_HEIGHT/2-180,tigrRGB(0,0,255),bomb); 
@@ -124,7 +122,6 @@ void playing(Tigr* screen, GameState* game){
     if(tigrKeyDown(screen,'P')){
         game->gameState=2;
     }
-  //  tigrFree(picture);
 }
 
 void paused(Tigr* screen, GameState* game){
@@ -209,4 +206,19 @@ void win(Tigr* screen, GameState* game){
 
 void cleanUpGame(GameState* game){
     shutdown_audio(&game->audio);
+    tigrFree(game->background);
+}
+
+void drawGame(Tigr* screen, GameState* game){
+    tigrClear(screen,tigrRGB(0,0,0));
+    game->bgScrollY+=1.0f;
+      
+    if(game->bgScrollY>=game->background->h){
+        game->bgScrollY=0;
+    }
+    int bgY=(int)game->bgScrollY;
+    tigrBlit(screen,game->background,0,0,0,bgY,screen->w,screen->h);
+     if (bgY > 0) {
+        tigrBlit(screen, game->background, 0, screen->h - bgY, 0, 0, screen->w, bgY);
+    }
 }

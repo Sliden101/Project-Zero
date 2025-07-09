@@ -5,7 +5,10 @@
 #include "screen.h"
     
 void initGame(Tigr* screen, GameState* game){
-
+ game->background=tigrLoadImage("assets/background.png");
+  if(!game->background){
+    printf("failed to load");
+  }
     init_audio(&game->audio);
     play_bgm(&game->audio, "assets/projectzero.mp3");
 
@@ -28,7 +31,6 @@ void initGame(Tigr* screen, GameState* game){
 
 int main() {
     Tigr* screen = tigrWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Project Zero", 0);
-
     GameState game;
 
     initGame(screen, &game);
