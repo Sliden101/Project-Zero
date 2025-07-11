@@ -47,7 +47,7 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
                 float aimAngle = atan2f(playerY - boss->y, playerX - boss->x);
                 spawnBossBullet(bullets, 15, boss->x, boss->y, aimAngle, PHASE_TWO_SPEED);
                 for (int i = 0; i < 8; i++) {
-                    spawnBossBullet(bullets,15, boss->x, boss->y, i * (2*M_PI/8), PHASE_TWO_SPEED);
+                    spawnBossBullet(bullets,PHASE_ONE_SIZE, boss->x, boss->y, i * (2*M_PI/8), PHASE_TWO_SPEED);
                 }
             }
             break;
@@ -59,7 +59,7 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
                 float angle = -boss->patternTimer * 0.2f;
                 float radius = 5 + (boss->patternTimer % 30) * 0.5f;
                 for (int i = 0; i < 4; i++) {
-                    spawnBossBullet(bullets, 6, 
+                    spawnBossBullet(bullets, PHASE_TWO_SIZE, 
                                    boss->x + cosf(angle + i*M_PI/2) * radius,
                                    boss->y + sinf(angle + i*M_PI/2) * radius,
                                    angle + i*M_PI/2, PHASE_THREE_SPEED);
@@ -72,14 +72,14 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
             if (boss->patternTimer % 5 == 0) {
                 float angle = boss->patternTimer * 0.1f;
                 for (int i = 0; i < 3; i++) {
-                    spawnBossBullet(bullets, 10, boss->x, boss->y, angle + i * (2*M_PI/3), PHASE_ONE_SPEED);
+                    spawnBossBullet(bullets, PHASE_THREE_SIZE_SPREAD, boss->x, boss->y, angle + i * (2*M_PI/3), PHASE_ONE_SPEED);
                 }
             }
             //Burst shotgun
             if(boss->patternTimer % 90 == 0){
                 float aimAngle = atan2f(playerY - boss->y, playerX - boss->x);
                 for(int i = -2; i<=2;i++){
-                    spawnBossBullet(bullets, 12, boss->x, boss->y, aimAngle + i * 0.2f, PHASE_ONE_SPEED * 1.5f);
+                    spawnBossBullet(bullets, PHASE_THREE_SIZE_SHOTGUN, boss->x, boss->y, aimAngle + i * 0.2f, PHASE_ONE_SPEED * 1.5f);
                 }
             }
             break;
