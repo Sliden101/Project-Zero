@@ -37,10 +37,22 @@ void updateBullets(Bullet* bullets){
     }
 }
 
-void drawBullets(Tigr* screen, Bullet* bullets){
+void drawBossBullets(Tigr* screen, Bullet* bullets){
+    Tigr* bullet=tigrLoadImage("assets/bullet.png");
     for(int i = 0; i<MAX_BULLETS;i++){
         if(bullets[i].active){
             tigrFillCircle(screen, bullets[i].x, bullets[i].y, bullets[i].size, tigrRGB(248,216,49));
+            tigrBlitAlpha(screen,bullet,bullets[i].x-15,bullets[i].y-20,0,0,bullet->w,bullet->h,1.0f);
+        }
+    }
+}
+
+void drawPlayerBullets(Tigr* screen, Bullet* bullets){
+    Tigr* bullet=tigrLoadImage("assets/playerbullet.png");
+    for(int i = 0; i<MAX_BULLETS;i++){
+        if(bullets[i].active){
+            tigrFillCircle(screen, bullets[i].x, bullets[i].y, bullets[i].size, tigrRGB(248,216,49));
+            tigrBlitAlpha(screen,bullet,bullets[i].x-10,bullets[i].y,0,0,bullet->w,bullet->h,1.0f);
         }
     }
 }

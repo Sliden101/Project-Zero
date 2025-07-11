@@ -17,6 +17,7 @@ void menu(Tigr* screen, GameState* game){
 
     int x = (screen->w - picture->w) / 2;
     int y = (screen->h - picture->h) / 2;
+    tigrClear(screen,tigrRGB(0,0,0));
 
     tigrBlit(screen, picture, x, y, 0, 0, picture->w, picture->h);
 
@@ -73,13 +74,13 @@ void playing(Tigr* screen, GameState* game){
 
     shootAtBoss(screen, &game->player, game->bullets, game->boss.x , game->boss.y);
     updateBullets(game->bullets);
-    drawBullets(screen, game->bullets);
+    drawPlayerBullets(screen, game->bullets);
     
 
     updateBoss(&game->boss, game->bossBullets, game->player.x, game->player.y);
     updateBullets(game->bossBullets);
 
-    drawBullets(screen, game->bossBullets);
+    drawBossBullets(screen, game->bossBullets);
     drawBoss(screen, &game->boss);
 
     saveHighScore(&game->highScore,game->score);
@@ -94,13 +95,11 @@ void playing(Tigr* screen, GameState* game){
         if(game->bullets[i].active&&checkCollision(game->bullets[i].x, game->bullets[i].y, 3, game->boss.x, game->boss.y, game->boss.hitboxRadius)){
             game->boss.health -= game->bullets[i].damage;
             game->bullets[i].active = 0;
-            printf("Player bullet hit boss! Health: %d\n", game->boss.health);
             game->score += 10;
         }
         if(game->bossBullets[i].active&&checkCollision(game->bossBullets[i].x, game->bossBullets[i].y, game->bossBullets[i].size, game->player.x, game->player.y, game->player.hitboxRadius)){
             game->player.lives--;
             game->bossBullets[i].active=0;
-            printf("Boss bullet hit Player! Lives: %d\n", game->player.lives);
         }
     }
     
@@ -211,6 +210,7 @@ void cleanUpGame(GameState* game){
 
 void drawGame(Tigr* screen, GameState* game){
     tigrClear(screen,tigrRGB(0,0,0));
+
     game->bgScrollY+=1.0f;
       
     if(game->bgScrollY>=game->background->h){
@@ -219,6 +219,6 @@ void drawGame(Tigr* screen, GameState* game){
     int bgY=(int)game->bgScrollY;
     tigrBlit(screen,game->background,0,0,0,bgY,screen->w,screen->h);
      if (bgY > 0) {
-        tigrBlit(screen, game->background, 0, screen->h - bgY, 0, 0, screen->w, bgY);
+        tigrBlit(screen, game->background, 0, screen->h - bgY, 0, 0, screen->w,bgY);
     }
 }

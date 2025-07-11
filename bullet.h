@@ -20,5 +20,6 @@ void initBullets(Bullet* bullets);
 void bombClear(Bullet* bullets);
 void spawnBullets(Bullet* bullets,int size, float x, float y, float angle);
 void updateBullets(Bullet* bullets);
-void drawBullets(Tigr* screen, Bullet* bullets);
+void drawBossBullets(Tigr* screen, Bullet* bullets);
+void drawPlayerBullets(Tigr* screen, Bullet* bullets);
 bool checkCollision(float x1, float y1, float r1, float x2, float y2, float r2);
