@@ -241,15 +241,8 @@ void cleanUpGame(GameState* game){
 
 void drawGame(Tigr* screen, GameState* game){
     tigrClear(screen,tigrRGB(0,0,0));
+    tigrBlit(screen,game->background,0,0,0,0,game->background->w,game->background->h);
 
-    game->bgScrollY+=1.0f;
-      
-    if(game->bgScrollY>=game->background->h){
-        game->bgScrollY=0;
-    }
-    int bgY=(int)game->bgScrollY;
-    tigrBlit(screen,game->background,0,0,0,bgY,screen->w,screen->h);
-     if (bgY > 0) {
-        tigrBlit(screen, game->background, 0, screen->h - bgY, 0, 0, screen->w,bgY);
-    }
+
+
 }
