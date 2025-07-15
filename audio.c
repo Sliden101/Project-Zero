@@ -1,7 +1,7 @@
 #include "audio.h"
 #include <stdio.h>
 
-void init_audio(AudioSystem* audio) {
+void initAudio(AudioSystem* audio) {
     ma_result result;
     
     result = ma_engine_init(NULL, &audio->engine);
@@ -11,7 +11,7 @@ void init_audio(AudioSystem* audio) {
     }
 }
 
-void play_bgm(AudioSystem* audio, const char* filepath) {
+void playBgm(AudioSystem* audio, const char* filepath) {
     ma_result result;
     
     // Load and start BGM (loops automatically)
@@ -32,11 +32,11 @@ void play_bgm(AudioSystem* audio, const char* filepath) {
     ma_sound_start(&audio->bgm);
 }
 
-void stop_bgm(AudioSystem* audio) {
+void stopBgm(AudioSystem* audio) {
     ma_sound_stop(&audio->bgm);
     ma_sound_uninit(&audio->bgm);
 }
 
-void shutdown_audio(AudioSystem* audio) {
+void shutdownAudio(AudioSystem* audio) {
     ma_engine_uninit(&audio->engine);
 }

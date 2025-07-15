@@ -4,6 +4,7 @@
         "bullet.h": "c",
         "numbers": "c",
         "audio.h": "c",
-        "stdio.h": "c"
+        "stdio.h": "c",
+        "highscore.h": "c"
     }
 }

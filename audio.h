@@ -6,7 +6,7 @@ typedef struct {
     ma_sound bgm;
 } AudioSystem;
 
-void init_audio(AudioSystem* audio);
-void play_bgm(AudioSystem* audio, const char* filepath);
-void stop_bgm(AudioSystem* audio);
-void shutdown_audio(AudioSystem* audio);
+void initAudio(AudioSystem* audio);
+void playBgm(AudioSystem* audio, const char* filepath);
+void stopBgm(AudioSystem* audio);
+void shutdownAudio(AudioSystem* audio);

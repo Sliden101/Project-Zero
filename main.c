@@ -10,14 +10,15 @@ void initGame(Tigr* screen, GameState* game){
     printf("failed to load");
   }
   printf("background loading %p\nof",game->background);
-    init_audio(&game->audio);
-    play_bgm(&game->audio, "assets/projectzero.mp3");
+    initAudio(&game->audio);
+    playBgm(&game->audio, "assets/projectzero.mp3");
 
     game->score = 0;
     game->gameState = 0;
 
     game->phase = 1;
-    game->frameCount = 0;
+    
+    game->frameCount = 0;  
     game->gameTime = 0;
     
     //Player Init

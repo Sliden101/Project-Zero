@@ -6,6 +6,7 @@
 #include "bullet.h"
 #include "audio.h"
 #include "highscore.h"
+#include "time.h"
 
 #define SCREEN_WIDTH 500
 #define SCREEN_HEIGHT 480
