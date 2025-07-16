@@ -30,6 +30,7 @@ typedef struct {
     Tigr* bossSprite;
     Tigr* bulletSprites[3];
     Tigr* background;
+    Tigr* side;
     AudioSystem audio;
 } GameState;
 

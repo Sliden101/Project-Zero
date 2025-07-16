@@ -239,8 +239,11 @@ void cleanUpGame(GameState* game){
 }
 
 void drawGame(Tigr* screen, GameState* game){
+     int x = (screen->w - game->side->w) / 2+150;
+    int y = (screen->h -game->side->h) / 2;
     tigrClear(screen,tigrRGB(0,0,0));
     tigrBlit(screen,game->background,0,0,0,0,game->background->w,game->background->h);
+    tigrBlit(screen,game->side,x,y,0,0,game->side->w,game->side->h);
 
 
 

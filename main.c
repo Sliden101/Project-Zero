@@ -6,6 +6,7 @@
     
 void initGame(Tigr* screen, GameState* game){
     game->background=tigrLoadImage("assets/background.png");
+    game->side=tigrLoadImage("assets/side.png");
     initAudio(&game->audio);
     playBgm(&game->audio, "assets/projectzero.mp3");
 
