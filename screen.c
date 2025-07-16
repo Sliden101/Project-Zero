@@ -26,7 +26,6 @@ void menu(Tigr* screen, GameState* game){
     
     tigrPrint(screen,tfont,SCREEN_WIDTH/2 - 165,SCREEN_HEIGHT/2+20, tigrRGB(0,255,255),"PLAY");
     tigrPrint(screen,tfont,SCREEN_WIDTH/2 + 135,SCREEN_HEIGHT/2+18, tigrRGB(0,255,255),"QUIT");
-
     int mouseX, mouseY, buttons;
 
     tigrMouse(screen, &mouseX, &mouseY, &buttons);
