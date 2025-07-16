@@ -17,10 +17,8 @@ void initPlayer(Player* player){
 
 void drawPlayer(Tigr* screen, Player* player){
    Tigr* picture=tigrLoadImage("assets/sprite.png");
-   tigrCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
-  // tigrBlit(screen,picture,player->x-10,player->y-10,0,0,picture->w,picture->h);
-   tigrBlitAlpha(screen,picture, player->x-10, player->y-10, 0, 0, picture->w, picture->h, 1.0f);
-
+   tigrBlitAlpha(screen,picture, player->x-15, player->y-15, 0, 0, picture->w, picture->h, 1.0f);
+   tigrFillCircle(screen, (int)player->x, (int)player->y, (int)player->hitboxRadius, player->color);
 
 }
 
@@ -60,7 +58,7 @@ void shootAtBoss(Tigr* screen,Player* player, Bullet* bullets, float bossX, floa
 
    if(tigrKeyHeld(screen, 'Z')){
       float angle = atan2f(bossY - player->y, bossX - player->x);
-      spawnBullets(bullets, 3, player->x, player->y, angle);
+      spawnPlayerBullets(bullets, 3, player->x, player->y, angle);
    }
 
    player->shootCooldown = player->shootDelay;

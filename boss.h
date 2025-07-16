@@ -3,7 +3,7 @@
 #include "bullet.h"
 #include "math.h"
 
-#define BOSS_HEALTH 7000
+#define BOSS_HEALTH 8000
 #define BOSS_HITBOX_RADIUS 10
 
 #define PHASE_ONE_SPEED 2.0f
@@ -33,4 +33,3 @@ typedef struct {
 void initBoss(Boss* boss);
 void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY);
 void drawBoss(Tigr* screen, Boss* boss);
-void spawnBossBullet(Bullet* bullets, int size, float x, float y, float angle, float speed);

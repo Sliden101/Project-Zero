@@ -100,28 +100,10 @@ void updateBoss(Boss* boss, Bullet* bullets, float playerX, float playerY) {
 
 void drawBoss(Tigr* screen, Boss* boss) {
     Tigr* picture=tigrLoadImage("assets/boss.png");
-    tigrFillCircle(screen, boss->x, boss->y, boss->hitboxRadius, boss->color);
+    // tigrFillCircle(screen, boss->x, boss->y, boss->hitboxRadius, boss->color);
     tigrBlitAlpha(screen,picture,boss->x-25,boss->y-20,0,0,picture->w,picture->h,1.0f);
     
     float healthPercent = (float)boss->health / boss->maxHealth;
     tigrFillRect(screen, boss->x - 50, boss->y - 40, 100 * healthPercent, 5, 
                 tigrRGB(255 * (1-healthPercent), 255 * healthPercent, 0));
-}
-
-void spawnBossBullet(Bullet* bullets, int size, float x, float y, float angle, float speed) {
-    for (int i = 0; i < MAX_BULLETS; i++) {
-        if (!bullets[i].active) {
-            bullets[i] = (Bullet){
-                .x = x,
-                .y = y,
-                .dx = cosf(angle) * speed,
-                .dy = sinf(angle) * speed,
-                .size = size,
-                .active = 1,
-                .damage = 1,
-                .color = tigrRGB(255, 100, 100)
-            };
-            return;
-        }
-    }
 }

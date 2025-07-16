@@ -8,16 +8,40 @@ void initBullets(Bullet* bullets){
     }
 }
 
-void spawnBullets(Bullet* bullets, int size, float x, float y, float angle){
+//Player Bullets
+void spawnPlayerBullets(Bullet* bullets, int size, float x, float y, float angle){
     for(int i = 0; i< MAX_BULLETS; i++){
         if(!bullets[i].active){
-            bullets[i].x = x;
-            bullets[i].y = y;
-            bullets[i].dx = cosf(angle) * BULLET_SPEED;
-            bullets[i].dy = sinf(angle) * BULLET_SPEED;
-            bullets[i].size = size;
-            bullets[i].active = 1;
-            bullets[i].damage = PLAYER_DAMAGE;
+            bullets[i] = (Bullet){
+                .x = x,
+                .y = y,
+                .dx = cosf(angle) * BULLET_SPEED,
+                .dy = sinf(angle) * BULLET_SPEED,
+                .size = size,
+                .active = 1,
+                .damage = PLAYER_DAMAGE,
+            };
+
+            return;
+        }
+    }
+}
+
+
+//Boss Bullets
+void spawnBossBullet(Bullet* bullets, int size, float x, float y, float angle, float speed) {
+    for (int i = 0; i < MAX_BULLETS; i++) {
+        if (!bullets[i].active) {
+            bullets[i] = (Bullet){
+                .x = x,
+                .y = y,
+                .dx = cosf(angle) * speed,
+                .dy = sinf(angle) * speed,
+                .size = size,
+                .active = 1,
+                .damage = 1,
+                .color = tigrRGB(255, 100, 100)
+            };
             return;
         }
     }

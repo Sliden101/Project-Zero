@@ -18,7 +18,8 @@ typedef struct {
 
 void initBullets(Bullet* bullets);
 void bombClear(Bullet* bullets);
-void spawnBullets(Bullet* bullets,int size, float x, float y, float angle);
+void spawnPlayerBullets(Bullet* bullets,int size, float x, float y, float angle);
+void spawnBossBullet(Bullet* bullets, int size, float x, float y, float angle, float speed);
 void updateBullets(Bullet* bullets);
 void drawBossBullets(Tigr* screen, Bullet* bullets);
 void drawPlayerBullets(Tigr* screen, Bullet* bullets);
