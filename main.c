@@ -5,11 +5,7 @@
 #include "screen.h"
     
 void initGame(Tigr* screen, GameState* game){
- game->background=tigrLoadImage("assets/background.png");
-  if(!game->background){
-    printf("failed to load");
-  }
-  printf("background loading %p\n",game->background);
+    game->background=tigrLoadImage("assets/background.png");
     initAudio(&game->audio);
     playBgm(&game->audio, "assets/projectzero.mp3");
 

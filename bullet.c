@@ -26,8 +26,6 @@ void spawnPlayerBullets(Bullet* bullets, int size, float x, float y, float angle
         }
     }
 }
-
-
 //Boss Bullets
 void spawnBossBullet(Bullet* bullets, int size, float x, float y, float angle, float speed) {
     for (int i = 0; i < MAX_BULLETS; i++) {

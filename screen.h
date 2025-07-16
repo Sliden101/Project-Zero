@@ -24,7 +24,6 @@ typedef struct {
     int phase;
     int frameCount;
     float gameTime;
-    int bgScrollY;
     int gameState; //0 = Menu, 1 = Playing, 2 = Paused, 3 = GameOver, 4 = Win
 
     Tigr* playerSprite;
