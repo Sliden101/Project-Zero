@@ -48,7 +48,7 @@ void drawBossBullets(Tigr* screen, Bullet* bullets){
 }
 
 void drawPlayerBullets(Tigr* screen, Bullet* bullets){
-    Tigr* bullet=tigrLoadImage("assets/playerbullet.png");
+    Tigr* bullet = tigrLoadImage("assets/playerbullet.png");
     for(int i = 0; i<MAX_BULLETS;i++){
         if(bullets[i].active){
             tigrFillCircle(screen, bullets[i].x, bullets[i].y, bullets[i].size, tigrRGB(248,216,49));

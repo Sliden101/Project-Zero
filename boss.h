@@ -3,7 +3,7 @@
 #include "bullet.h"
 #include "math.h"
 
-#define BOSS_HEALTH 6000
+#define BOSS_HEALTH 7000
 #define BOSS_HITBOX_RADIUS 10
 
 #define PHASE_ONE_SPEED 2.0f

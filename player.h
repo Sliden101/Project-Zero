@@ -8,7 +8,6 @@ typedef struct {
     float hitboxRadius;  // Collision size
     int lives;           // Remaining lives
     int bombs;           // Bomb count (screen clear)
-    int invincibleFrames;// Frames after being hit
     int focusMode;       // 0=normal, 1=focused (slow movement)
     int shootCooldown;
     int shootDelay;
