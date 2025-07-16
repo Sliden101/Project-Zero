@@ -7,8 +7,8 @@ https://github.com/mackron/miniaudio
 https://github.com/erkkah/tigr
 
 ```sh
-#Windows tbd
-
+#Windows
+gcc main.c tigr.c player.c boss.c bullet.c audio.c screen.c highscore.c -o .\dist\out.exe -lgdi32 -lopengl32 -mwindows
 # Linux
 gcc main.c tigr.c player.c boss.c bullet.c audio.c screen.c highscore.c -o ./dist/out -lGLU -lGL -lX11 -lm && ./dist/out
 
