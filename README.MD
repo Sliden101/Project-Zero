@@ -45,6 +45,5 @@ lasers + left right float?
 
 story:
 
-pheaktra (main character) writes spagetti code which mr ronan (boss) absolutely doesn't like
 
 story lines
